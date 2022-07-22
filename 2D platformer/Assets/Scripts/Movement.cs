@@ -33,11 +33,13 @@ public class Movement : MonoBehaviour
         if (hit.collider != null)
         {
             jumpCount = 1;
+            anim.SetBool("Grounded", true);
         }
         if (Input.GetKeyDown(KeyCode.Space) && jumpCount != MaxJumpCount)
         {
             Jump();
         }
+        anim.SetFloat("velocityY", rb.velocity.y);
     }
 
     private void FixedUpdate()
@@ -49,14 +51,7 @@ public class Movement : MonoBehaviour
     {
         Flip();
         rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
-        if (rb.velocity.x != 0)
-        {
-            anim.SetBool("isMoving", true);
-        }
-        else
-        {
-            anim.SetBool("isMoving", false);
-        }
+        anim.SetBool("isMoving", moveX != 0);
     }
 
     private void Jump()
@@ -69,11 +64,11 @@ public class Movement : MonoBehaviour
     {
         if (moveX > 0)
         {
-            transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+            transform.localScale = Vector3.one;
         }
         else if (moveX < 0)
         {
-            transform.localScale = new Vector3((-1) * scaleX, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 }
