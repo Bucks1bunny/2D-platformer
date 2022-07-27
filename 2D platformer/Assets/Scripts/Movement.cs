@@ -14,13 +14,11 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
     private int MaxJumpCount = 2;
     private int jumpCount;
-    private float scaleX;
 
     RaycastHit2D hit;
 
     private void Start()
     {
-        scaleX = transform.localScale.x;
         rb = GetComponent<Rigidbody2D>();
     }
     void Update()

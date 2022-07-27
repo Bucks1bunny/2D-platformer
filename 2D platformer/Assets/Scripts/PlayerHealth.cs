@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour, TakeDamage
+public class PlayerHealth
+    : MonoBehaviour, TakeDamage
 {
     [SerializeField]
     private Image[] hearts;
-    [SerializeField]
-    private Text coinText;
-    private int coins;
     private int health = 3;
     private Animator anim;
     private Rigidbody2D rb;
@@ -26,37 +24,28 @@ public class Player : MonoBehaviour, TakeDamage
             {
                 heart.enabled = false;
                 health--;
+                anim.SetTrigger("Damaged");
                 break;
             }
+        }
+        if (health == 0)
+        {
+            Die();
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Coin")
-        {
-            OnCoinPickup(1);
-            Destroy(collision.gameObject);
-        }
-        else if (collision.transform.tag == "Enemy")
+        if (collision.transform.tag == "Enemy")
         {
             OnTakeDamage();
-            if (health == 0)
-            {
-                Death();
-            }
         }
     }
 
-    private void OnCoinPickup(int amount)
-    {
-        coins += amount;
-        coinText.text = coins.ToString();
-    }
-
-    private void Death()
+    private void Die()
     {
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("Dead");
+        Destroy(gameObject, 0.35f);
     }
 }

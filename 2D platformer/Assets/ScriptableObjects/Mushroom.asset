@@ -15,4 +15,4 @@ MonoBehaviour:
   damage: 0
   health: 2
   speed: 1
-  wayPoints: []
+  waypoints: {fileID: 0}

@@ -6,5 +6,4 @@ public class EnemyScriptableObject : ScriptableObject
     public int damage;
     public int health;
     public float speed;
-    public GameObject[] wayPoints;
 }
