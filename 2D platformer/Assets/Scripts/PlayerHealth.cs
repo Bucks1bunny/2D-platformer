@@ -1,31 +1,30 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealth
-    : MonoBehaviour, TakeDamage
+public class PlayerHealth : MonoBehaviour, TakeDamage
 {
+    [SerializeField]
+    private float repulsiveForce;
     [SerializeField]
     private Image[] hearts;
     private int health = 3;
     private Animator anim;
     private Rigidbody2D rb;
 
-    private void Start()
+    public void OnTakeDamage(int _damage)
     {
-        anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    public void OnTakeDamage()
-    {
-        foreach (var heart in hearts)
+        for (int i = 0; i < _damage; i++)
         {
-            if (heart.IsActive())
+            foreach (var heart in hearts)
             {
-                heart.enabled = false;
-                health--;
-                anim.SetTrigger("Damaged");
-                break;
+                if (heart.IsActive())
+                {
+                    heart.enabled = false;
+                    health--;
+                    anim.SetTrigger("Damaged");
+
+                    break;
+                }
             }
         }
         if (health == 0)
@@ -34,11 +33,21 @@ public class PlayerHealth
         }
     }
 
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.tag == "Enemy")
         {
-            OnTakeDamage();
+            var force = collision.transform.position - transform.position;
+            force = force.normalized;
+            rb.AddForce(force * repulsiveForce);
+
+            OnTakeDamage(1);
         }
     }
 
@@ -46,6 +55,6 @@ public class PlayerHealth
     {
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("Dead");
-        Destroy(gameObject, 0.35f);
+        Destroy(gameObject, 0.5f);
     }
 }

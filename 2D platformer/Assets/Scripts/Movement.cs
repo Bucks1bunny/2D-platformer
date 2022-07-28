@@ -15,17 +15,15 @@ public class Movement : MonoBehaviour
     private int MaxJumpCount = 2;
     private int jumpCount;
 
-    RaycastHit2D hit;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
     void Update()
     {
-        hit = Physics2D.Raycast(transform.position, -Vector2.up, 1f, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 1f, layerMask);
         moveX = Input.GetAxis("Horizontal");
-
+        anim.SetFloat("velocityY", rb.velocity.y);
         if (hit.collider != null)
         {
             jumpCount = 1;
@@ -35,7 +33,6 @@ public class Movement : MonoBehaviour
         {
             Jump();
         }
-        anim.SetFloat("velocityY", rb.velocity.y);
     }
 
     private void FixedUpdate()

@@ -15,6 +15,18 @@ public class AttackingEnemy : Enemy
     private PlayerHealth playerHealth;
     private float cooldownTimer = Mathf.Infinity;
 
+    protected override void Walk()
+    {
+        if (PlayerInSight())
+        {
+            StopWalking();
+        }
+        else
+        {
+            base.Walk();
+        }
+    }
+
     private void Update()
     {
         Walk();
@@ -48,7 +60,7 @@ public class AttackingEnemy : Enemy
     {
         if (PlayerInSight())
         {
-            playerHealth.OnTakeDamage();
+            playerHealth.OnTakeDamage(data.damage);
         }
     }
 
@@ -59,15 +71,4 @@ public class AttackingEnemy : Enemy
             new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
     }
 
-    protected override void Walk()
-    {
-        if (PlayerInSight())
-        {
-            StopWalking();
-        }
-        else
-        {
-            base.Walk();
-        }
-    }
 }

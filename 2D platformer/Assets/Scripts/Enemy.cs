@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, TakeDamage
 {
     [SerializeField]
     protected Transform[] points;
@@ -9,33 +9,19 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private bool isWalking;
     protected Transform target;
-    protected int waypointIndex = 0;
     protected Animator anim;
+    private int waypointIndex = 0;
     private int direction = 1;
+    private int health;
 
-    private void Awake()
+    public void OnTakeDamage(int _damage)
     {
-        target = points[0];
-        anim = GetComponent<Animator>();
-    }
-
-    private void Update()
-    {
-        Walk();
-    }
-
-    private void GetNextWaypoint()
-    {
-        if (waypointIndex == 1)
+        health -= _damage;
+        anim.SetTrigger("Damaged");
+        if (health == 0)
         {
-            waypointIndex = 0;
+            Death();
         }
-        else
-        {
-            waypointIndex++;
-        }
-        Flip();
-        target = points[waypointIndex];
     }
 
     protected virtual void Walk()
@@ -59,9 +45,41 @@ public class Enemy : MonoBehaviour
         anim.SetBool("isMoving", false);
     }
 
+    private void Awake()
+    {
+        target = points[0];
+        anim = GetComponent<Animator>();
+        health = data.health;
+    }
+
+    private void Update()
+    {
+        Walk();
+    }
+
+    private void GetNextWaypoint()
+    {
+        if (waypointIndex == 1)
+        {
+            waypointIndex = 0;
+        }
+        else
+        {
+            waypointIndex++;
+        }
+        Flip();
+        target = points[waypointIndex];
+    }
+
     private void Flip()
     {
         direction *= -1;
         transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * direction, transform.localScale.y, transform.localScale.z);
+    }
+
+    private void Death()
+    {
+        anim.SetTrigger("Dead");
+        Destroy(gameObject, 0.5f);
     }
 }

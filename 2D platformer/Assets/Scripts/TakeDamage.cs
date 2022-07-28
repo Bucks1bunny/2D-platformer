@@ -1,4 +1,4 @@
 public interface TakeDamage
 {
-    public void OnTakeDamage();
+    public void OnTakeDamage(int _damage);
 }
