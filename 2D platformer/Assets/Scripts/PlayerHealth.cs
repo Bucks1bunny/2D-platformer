@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour, TakeDamage
 {
+    public event Action Died = delegate { };
+
     [SerializeField]
     private float repulsiveForce;
     [SerializeField]
@@ -43,8 +46,8 @@ public class PlayerHealth : MonoBehaviour, TakeDamage
     {
         if (collision.transform.tag == "Enemy")
         {
-            var force = collision.transform.position - transform.position;
-            force = force.normalized;
+            var force = transform.position - collision.transform.position;
+            force.Normalize();
             rb.AddForce(force * repulsiveForce);
 
             OnTakeDamage(1);
@@ -56,5 +59,6 @@ public class PlayerHealth : MonoBehaviour, TakeDamage
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("Dead");
         Destroy(gameObject, 0.5f);
+        Died();
     }
 }

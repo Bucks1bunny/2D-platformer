@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour, TakeDamage
     protected EnemyScriptableObject data;
     [SerializeField]
     private bool isWalking;
+    [SerializeField]
+    private GameObject coin;
     protected Transform target;
     protected Animator anim;
     private int waypointIndex = 0;
@@ -80,6 +82,7 @@ public class Enemy : MonoBehaviour, TakeDamage
     private void Death()
     {
         anim.SetTrigger("Dead");
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 0.1f);
+        Instantiate(coin, transform.position, Quaternion.identity);
     }
 }

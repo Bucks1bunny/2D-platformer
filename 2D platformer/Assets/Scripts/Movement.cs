@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    void Update()
+    private void Update()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 1f, layerMask);
         moveX = Input.GetAxis("Horizontal");
