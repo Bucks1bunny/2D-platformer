@@ -24,6 +24,7 @@ public class Movement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 1f, layerMask);
         moveX = Input.GetAxis("Horizontal");
         anim.SetFloat("velocityY", rb.velocity.y);
+
         if (hit.collider != null)
         {
             jumpCount = 1;
