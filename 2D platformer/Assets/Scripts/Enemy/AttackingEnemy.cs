@@ -3,11 +3,11 @@ using UnityEngine;
 public class AttackingEnemy : Enemy
 {
     [SerializeField]
-    private float attackCooldown;
-    [SerializeField]
     private BoxCollider2D boxCollider;
     [SerializeField]
     private LayerMask playerLayer;
+    [SerializeField]
+    private float attackCooldown;
     [SerializeField]
     private float range;
     [SerializeField]

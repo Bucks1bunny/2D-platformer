@@ -5,15 +5,17 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour, IUpdateable
 {
     [SerializeField]
+    private GameObject _camera;
+    [SerializeField]
     private Timer timer;
     [SerializeField]
     private float levelTime;
-    private HashSet<GameObject> enemies = new HashSet<GameObject>();
 
     private void Start()
     {
-        timer.TimeEnded += OnTimeEnded;
+        _camera.transform.position = new Vector3(0, 0, -10);
 
+        timer.TimeEnded += OnTimeEnded;
         timer.CurrentTime = levelTime;
         timer.StartTimer();
 
