@@ -4,8 +4,6 @@ using System.Collections.Generic;
 public class Enemy : MonoBehaviour, TakeDamage
 {
     [SerializeField]
-    protected List<Vector3> wayPoints = new List<Vector3>();
-    [SerializeField]
     protected EnemyScriptableObject data;
     protected Vector3 target;
     protected Animator anim;
@@ -14,6 +12,7 @@ public class Enemy : MonoBehaviour, TakeDamage
     private bool isWalking;
     [SerializeField]
     private GameObject coin;
+    private List<Vector3> waypoints = new List<Vector3>();
     private int waypointIndex = 0;
     private int direction = 1;
     private int health;
@@ -32,10 +31,11 @@ public class Enemy : MonoBehaviour, TakeDamage
     {
         if (isWalking)
         {
+            anim.SetBool("isMoving", true);
+
             Vector3 dir = target - transform.position;
             transform.Translate(dir.normalized * data.speed * Time.deltaTime, Space.World);
 
-            anim.SetBool("isMoving", true);
             if (Vector3.Distance(target, transform.position) <= 0.2f)
             {
                 GetNextWaypoint();
@@ -51,7 +51,11 @@ public class Enemy : MonoBehaviour, TakeDamage
 
     private void Awake()
     {
-        target = wayPoints[0];
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            waypoints.Add(transform.GetChild(i).transform.position);
+        }
+        target = waypoints[0];
         anim = GetComponent<Animator>();
         health = data.health;
     }
@@ -63,16 +67,17 @@ public class Enemy : MonoBehaviour, TakeDamage
 
     private void GetNextWaypoint()
     {
-        if (waypointIndex == 1)
+        switch (waypointIndex)
         {
-            waypointIndex = 0;
-        }
-        else
-        {
-            waypointIndex++;
+            case 1:
+                waypointIndex = 0;
+                break;
+            default:
+                waypointIndex++;
+                break;
         }
         Flip();
-        target = wayPoints[waypointIndex];
+        target = waypoints[waypointIndex];
     }
 
     private void Flip()

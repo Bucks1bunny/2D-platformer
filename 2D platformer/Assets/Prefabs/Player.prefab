@@ -162,7 +162,7 @@ MonoBehaviour:
     m_Bits: 64
   anim: {fileID: 7050793307259327206}
   speed: 5
-  jumpForce: 10
+  jumpForce: 11
 --- !u!114 &7050793307259327209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a479f1aaa19014c91990d25c97e865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxCollider: {fileID: 0}
+  boxCollider: {fileID: 4716947352621366202}
   range: 0.3
   attackCooldown: 1.5
   damage: 1

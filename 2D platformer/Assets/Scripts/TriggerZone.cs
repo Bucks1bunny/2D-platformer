@@ -4,12 +4,18 @@ public class TriggerZone : MonoBehaviour, IUpdateable
 {
     [SerializeField]
     private Vector3 newCameraPosition;
-    private GameObject camera;
+    [SerializeField]
+    private float cameraSize;
+    public GameObject Camera
+    {
+        get;
+        private set;
+    }
 
     public void Tick()
     {
-        camera.transform.position = newCameraPosition;
-        if (camera.transform.position == newCameraPosition)
+        Camera.transform.position = newCameraPosition;
+        if (Camera.transform.position == newCameraPosition)
         {
             UpdateManager.UnregisterLogic(this);
         }
@@ -17,15 +23,16 @@ public class TriggerZone : MonoBehaviour, IUpdateable
 
     private void Awake()
     {
-        camera = GameObject.FindGameObjectWithTag("MainCamera");
+        Camera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             UpdateManager.RegisterLogic(this);
         }
+        Camera.GetComponent<Camera>().orthographicSize = cameraSize;
     }
 
 }

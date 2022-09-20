@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField]
-    private BoxCollider2D boxCollider;
+    private CapsuleCollider2D boxCollider;
     [SerializeField]
     private float range;
     [SerializeField]

@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour, IUpdateable
 
     private void Start()
     {
-        _camera.transform.position = new Vector3(0, 0, -10);
+        _camera.transform.position = new Vector3(0, 0.5f, -10);
+        _camera.GetComponent<Camera>().orthographicSize = 5.5f;
 
         timer.TimeEnded += OnTimeEnded;
         timer.CurrentTime = levelTime;
