@@ -14,12 +14,11 @@ GameObject:
   - component: {fileID: 4716947352621366202}
   - component: {fileID: 7050793307259327206}
   - component: {fileID: 7050793307259327202}
-  - component: {fileID: 7050793307259327209}
   - component: {fileID: 7050793307259327208}
   - component: {fileID: 7050793307259327211}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,22 +162,6 @@ MonoBehaviour:
   anim: {fileID: 7050793307259327206}
   speed: 5
   jumpForce: 11
---- !u!114 &7050793307259327209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7050793307259327200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29a479f1aaa19014c91990d25c97e865, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxCollider: {fileID: 4716947352621366202}
-  range: 0.3
-  attackCooldown: 1.5
-  damage: 1
 --- !u!114 &7050793307259327208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,10 +175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   repulsiveForce: 1500
-  hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &7050793307259327211
 MonoBehaviour:
   m_ObjectHideFlags: 0

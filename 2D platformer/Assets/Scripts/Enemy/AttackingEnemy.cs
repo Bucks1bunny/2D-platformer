@@ -60,7 +60,7 @@ public class AttackingEnemy : Enemy
     {
         if (PlayerInSight())
         {
-            playerHealth.OnTakeDamage(data.damage);
+            playerHealth.OnTakeDamage();
         }
     }
 

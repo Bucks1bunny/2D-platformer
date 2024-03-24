@@ -42,7 +42,8 @@ GameObject:
   - component: {fileID: 6144693674704969373}
   - component: {fileID: 6144693674704969370}
   - component: {fileID: 6144693674704969374}
-  - component: {fileID: 6144693674704969375}
+  - component: {fileID: 1423176065237951591}
+  - component: {fileID: 768625400391125798}
   m_Layer: 8
   m_Name: Mushroom
   m_TagString: Enemy
@@ -145,11 +146,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 6144693674704969371}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 5d807673679650347b53124b8228b277, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.1}
+  m_Offset: {x: 0, y: -0.3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -160,9 +161,35 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.8}
+  m_Size: {x: 0.7, y: 0.4}
   m_EdgeRadius: 0
---- !u!114 &6144693674704969375
+--- !u!61 &1423176065237951591
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6144693674704969371}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.03}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.69, y: 0.25}
+  m_EdgeRadius: 0
+--- !u!114 &768625400391125798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,12 +198,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6144693674704969371}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 735dd182bb93fc74890d2d284a9f4c7d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9058466183b7d51438f4452bf92a0f8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: cc213de269e14b544981bda14c301ab8, type: 2}
   isWalking: 0
-  coin: {fileID: 2694046747381144363, guid: ab5f37ec442a4614eabef7a94852207a, type: 3}
+  upperBody: {fileID: 1423176065237951591}
+  body: {fileID: 6144693674704969374}
 --- !u!1 &6321475714166932892
 GameObject:
   m_ObjectHideFlags: 0

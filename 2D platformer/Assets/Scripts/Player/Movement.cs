@@ -13,24 +13,36 @@ public class Movement : MonoBehaviour
     private float moveX;
     private Rigidbody2D rb;
     private int MaxJumpCount = 2;
-    private int jumpCount;
+    private int jumpCounter;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
     private void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 1f, layerMask);
-        moveX = Input.GetAxis("Horizontal");
         anim.SetFloat("velocityY", rb.velocity.y);
 
-        if (hit.collider != null)
+        RaycastHit2D hitGround = Physics2D.Raycast(transform.position, -Vector2.up, 1f, layerMask);
+        moveX = Input.GetAxis("Horizontal");
+
+        //Checking if player grounded, if true jumpCounter sets to 1
+        if (hitGround.collider != null)
         {
-            jumpCount = 1;
-            anim.SetBool("Grounded", true);
+            jumpCounter = 0;
+            anim.SetBool("Jump", false);
         }
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount != MaxJumpCount)
+        else if (hitGround.collider == null)
+        {
+            bool Jumped = anim.GetBool("Jump");
+            if (!Jumped)
+            {
+                anim.SetBool("Jump", true);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCounter != MaxJumpCount)
         {
             Jump();
         }
@@ -51,7 +63,7 @@ public class Movement : MonoBehaviour
     private void Jump()
     {
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        jumpCount++;
+        jumpCounter++;
     }
 
     private void Flip()

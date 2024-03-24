@@ -8,32 +8,12 @@ public class PlayerHealth : MonoBehaviour, TakeDamage
 
     [SerializeField]
     private float repulsiveForce;
-    [SerializeField]
-    private Image[] hearts;
-    private int health = 3;
     private Animator anim;
     private Rigidbody2D rb;
 
-    public void OnTakeDamage(int _damage)
+    public void OnTakeDamage()
     {
-        for (int i = 0; i < _damage; i++)
-        {
-            foreach (var heart in hearts)
-            {
-                if (heart.IsActive())
-                {
-                    heart.enabled = false;
-                    health--;
-                    anim.SetTrigger("Damaged");
-
-                    break;
-                }
-            }
-        }
-        if (health == 0)
-        {
             Die();
-        }
     }
 
     private void Start()
@@ -46,11 +26,16 @@ public class PlayerHealth : MonoBehaviour, TakeDamage
     {
         if (collision.transform.tag == "Enemy")
         {
-            var force = transform.position - collision.transform.position;
-            force.Normalize();
-            rb.AddForce(force * repulsiveForce);
-
-            OnTakeDamage(1);
+            if (collision == collision.GetComponent<NotAttackingEnemy>().upperBody)
+            {
+                var force = transform.position - collision.transform.position;
+                force.Normalize();
+                rb.AddForce(force * repulsiveForce);
+            }
+            else
+            {
+                OnTakeDamage();
+            }
         }
     }
 

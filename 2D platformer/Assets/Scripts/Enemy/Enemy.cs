@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Enemy : MonoBehaviour, TakeDamage
+public class Enemy : MonoBehaviour//, TakeDamage
 {
     [SerializeField]
     protected EnemyScriptableObject data;
@@ -10,22 +10,9 @@ public class Enemy : MonoBehaviour, TakeDamage
 
     [SerializeField]
     private bool isWalking;
-    [SerializeField]
-    private GameObject coin;
     private List<Vector3> waypoints = new List<Vector3>();
     private int waypointIndex = 0;
     private int direction = 1;
-    private int health;
-
-    public void OnTakeDamage(int _damage)
-    {
-        health -= _damage;
-        anim.SetTrigger("Damaged");
-        if (health == 0)
-        {
-            Death();
-        }
-    }
 
     protected virtual void Walk()
     {
@@ -57,7 +44,6 @@ public class Enemy : MonoBehaviour, TakeDamage
         }
         target = waypoints[0];
         anim = GetComponent<Animator>();
-        health = data.health;
     }
 
     private void Update()
@@ -84,12 +70,5 @@ public class Enemy : MonoBehaviour, TakeDamage
     {
         direction *= -1;
         transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * direction, transform.localScale.y, transform.localScale.z);
-    }
-
-    private void Death()
-    {
-        anim.SetTrigger("Dead");
-        Destroy(gameObject, 0.1f);
-        Instantiate(coin, transform.position, Quaternion.identity);
     }
 }
