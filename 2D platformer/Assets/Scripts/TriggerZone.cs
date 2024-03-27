@@ -14,7 +14,8 @@ public class TriggerZone : MonoBehaviour, IUpdateable
 
     public void Tick()
     {
-        Camera.transform.position = newCameraPosition;
+        Camera.transform.position = Vector3.Lerp(Camera.transform.position, newCameraPosition, 0.2f);
+
         if (Camera.transform.position == newCameraPosition)
         {
             UpdateManager.UnregisterLogic(this);

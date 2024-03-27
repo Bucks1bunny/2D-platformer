@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NotAttackingEnemy : Enemy
+public class Mushroom : Enemy
 {
     [SerializeField]
     public Collider2D upperBody;

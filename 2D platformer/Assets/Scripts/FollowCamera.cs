@@ -6,12 +6,20 @@ public class FollowCamera : MonoBehaviour, IUpdateable
 {
     [SerializeField]
     private Transform player;
-    private float offset = -10;
-    private float minX, maxX, minY, maxY;
+    [SerializeField]
+    private Vector3 startPosition;
+    [SerializeField]
+    private float cameraSize;
 
     private void Awake()
     {
         UpdateManager.RegisterLogic(this);
+    }
+
+    private void Start()
+    {
+        transform.position = startPosition;
+        GetComponent<Camera>().orthographicSize = cameraSize;
     }
 
     public void Tick()

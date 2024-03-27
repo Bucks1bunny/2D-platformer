@@ -22,11 +22,12 @@ public class PlayerHealth : MonoBehaviour, TakeDamage
         rb = GetComponent<Rigidbody2D>();
     }
 
+    //Checked if enemy is mushroom or not
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.tag == "Enemy")
         {
-            if (collision == collision.GetComponent<NotAttackingEnemy>().upperBody)
+            if (collision == collision.GetComponent<Mushroom>().upperBody)
             {
                 var force = transform.position - collision.transform.position;
                 force.Normalize();

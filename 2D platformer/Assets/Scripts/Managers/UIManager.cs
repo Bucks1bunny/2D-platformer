@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour, IUpdateable
     private GameObject startUI;
     [SerializeField]
     private GameObject deathUI;
+    [SerializeField]
+    private DeathTrigger deathtrigger;
 
     public float levelTime;
 
@@ -34,6 +36,7 @@ public class UIManager : MonoBehaviour, IUpdateable
     private void Start()
     {
         playerHealth.Died += OnDeath;
+        deathtrigger.deathtriggered += OnDeath;
         deathUI.SetActive(false);
     }
 
@@ -57,9 +60,5 @@ public class UIManager : MonoBehaviour, IUpdateable
     {
         Debug.Log("Click");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-    public void DebugTry()
-    {
-        Debug.Log("click");
     }
 }

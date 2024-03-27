@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour
     {
         anim.SetFloat("velocityY", rb.velocity.y);
 
-        RaycastHit2D hitGround = Physics2D.Raycast(transform.position, -Vector2.up, 1f, layerMask);
+        RaycastHit2D hitGround = Physics2D.Raycast(transform.position, -Vector2.up, 0.7f, layerMask);
         moveX = Input.GetAxis("Horizontal");
 
         //Checking if player grounded, if true jumpCounter sets to 1
@@ -42,7 +42,7 @@ public class Movement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCounter != MaxJumpCount)
+        if (Input.GetKeyDown(KeyCode.W) && jumpCounter != MaxJumpCount)
         {
             Jump();
         }
